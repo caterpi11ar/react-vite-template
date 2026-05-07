@@ -12,7 +12,7 @@
 
 [English](./README.md) | **简体中文**
 
-基于 React + Vite 的生产级单页应用模板。
+预装 TanStack Router、TanStack Query、Zustand 和 Tailwind CSS v4 的 React + Vite 模板。
 
 ## 能力清单
 

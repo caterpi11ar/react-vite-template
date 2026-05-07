@@ -12,7 +12,7 @@
 
 **English** | [简体中文](./README.zh-CN.md)
 
-An opinionated React + Vite template for building production-grade SPAs.
+A React + Vite template with TanStack Router, TanStack Query, Zustand and Tailwind CSS v4 preconfigured.
 
 ## Features
 
