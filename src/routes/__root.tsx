@@ -1,17 +1,13 @@
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { createRootRoute, Outlet } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-
-export const Route = createRootRoute({
-  component: RootComponent,
-})
+import { Devtools } from '@/components/devtools'
 
 function RootComponent() {
   return (
     <>
       <Outlet />
-      <TanStackRouterDevtools />
-      <ReactQueryDevtools buttonPosition="bottom-left" />
+      <Devtools />
     </>
   )
 }
+
+export const Route = createRootRoute({ component: RootComponent })
