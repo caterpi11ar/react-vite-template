@@ -1,7 +1,6 @@
 import type { FC } from 'react'
-import { MultiProvider } from '@/components/multi-provider'
-
 import { AntdProvider } from '@/providers/antd-provider'
+import { MultiProvider } from '@/providers/multi-provider'
 import { QueryProvider } from '@/providers/query-provider'
 import { RouterProvider } from '@/providers/router-provider'
 
