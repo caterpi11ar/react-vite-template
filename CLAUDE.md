@@ -21,13 +21,13 @@ All source files and directories use **kebab-case** (`aa-bb`).
 
 - Files: `use-is-mobile.ts`, `query-provider.tsx`, `multi-provider.tsx`, `chunk-error-handler.ts`
 - Directories: `src/components/devtools/`, `src/lib/initialize/`
-- Exceptions that must stay as-is: `App.tsx`, `__root.tsx` (TanStack Router root-route convention), `routeTree.gen.ts` (generated)
+- Exceptions that must stay as-is: `App.tsx`
 
 When adding a new file, keep the extension consistent with the content (`.tsx` for JSX, `.ts` otherwise) and match the kebab-case pattern of neighboring files.
 
 ## Architecture
 
-Stack: React 19 + React Compiler, Vite 8 (rolldown), TypeScript strict, TanStack Router (file-based), TanStack Query, Zustand, Axios, Zod, Tailwind v4.
+Stack: React 19 + React Compiler, Vite 8 (rolldown), TypeScript strict, React Router, TanStack Query, Zustand, Axios, Zod, Tailwind v4.
 
 ### Entry flow
 
@@ -37,18 +37,17 @@ Stack: React 19 + React Compiler, Vite 8 (rolldown), TypeScript strict, TanStack
 
 ### Routing
 
-TanStack Router with **file-based routing** + auto code-splitting, configured in `vite.config.ts` via `tanstackRouter({ target: 'react', autoCodeSplitting: true })`.
+React Router with Data Router mode (`createBrowserRouter` + `RouterProvider`).
 
-- Routes live in `src/routes/`. `__root.tsx` is the root layout (renders `<Outlet />` + `<Devtools />`).
-- `src/routeTree.gen.ts` is **generated** — do not hand-edit; the Vite plugin regenerates it when route files change.
-- The router instance (`src/lib/router.ts`) declares `Register` module augmentation so `router` is globally typed. Defaults: `defaultPreload: 'intent'`, `defaultPreloadStaleTime: 0`.
-- Note the Vite plugin ordering comment in `vite.config.ts`: `@tanstack/router-plugin` must come **before** `@vitejs/plugin-react`.
+- Routes live in `src/routes/`. The current route table is flat; add a layout component with `<Outlet />` only when a real shared layout is needed.
+- Route components are plain React components exported from route files.
+- The router singleton in `src/lib/router.ts` explicitly declares the route tree.
 
 ### Data / query layer
 
 `src/providers/query-provider.tsx` owns the `QueryClient`. Two behaviors worth preserving:
 - Environment-aware `retry`: disabled in development, capped in production, and never retried on 401/403 Axios errors.
-- Global `queryCache.onError`: a 401 triggers `router.navigate({ to: '/', search: { redirect } })`, where `redirect` is the current href. This couples the query layer to the router — changes to auth-redirect behavior live here.
+- Global `queryCache.onError`: a 401 triggers `router.navigate('/?redirect=<encoded current href>')`. This couples the query layer to the router — changes to auth-redirect behavior live here.
 
 Environment access goes through `src/lib/env.ts`, which parses `import.meta.env` with a Zod schema. Add new env vars to both the `Env` interface and the schema.
 
@@ -62,11 +61,11 @@ Enabled via `@rolldown/plugin-babel` with `reactCompilerPreset()` (see the comme
 
 ### Devtools
 
-`src/components/devtools/` lazy-loads TanStack Router + React Query devtools wrapped in `<Suspense>`. Mounted from the root route.
+`src/components/devtools/` lazy-loads React Query devtools wrapped in `<Suspense>`. Mounted from `App.tsx` alongside the router provider.
 
 ## Conventions
 
 - Path alias: `@/*` → `src/*` (wired by `tsconfigPaths: true` in `vite.config.ts`).
 - Imports of Zod use `zod/v4` subpath (see `src/lib/env.ts`).
-- ESLint config is `@antfu/eslint-config` with project-specific rule overrides in `eslint.config.mjs`. `src/routeTree.gen.ts` is ignored.
+- ESLint config is `@antfu/eslint-config` with project-specific rule overrides in `eslint.config.mjs`.
 - TypeScript `strict` is on with `noUnusedLocals`, `noUnusedParameters`, `noUncheckedSideEffectImports`.

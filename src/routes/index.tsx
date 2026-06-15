@@ -1,10 +1,13 @@
 import type { FC } from 'react'
-import { createFileRoute } from '@tanstack/react-router'
+import type { RouteObject } from 'react-router'
 
-const IndexRoute: FC = () => {
+export const IndexRoute: FC = () => {
   return <main aria-label="Application" />
 }
 
-export const Route = createFileRoute('/')({
-  component: IndexRoute,
-})
+export const indexRoutes = [
+  {
+    path: '/',
+    Component: IndexRoute,
+  },
+] satisfies RouteObject[]

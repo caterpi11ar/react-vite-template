@@ -1,7 +1,7 @@
 import antfu from '@antfu/eslint-config'
 
 export default antfu({
-  ignores: ['node_modules', 'dist', '**/*.md', 'src/routeTree.gen.ts'],
+  ignores: ['node_modules', 'dist', '**/*.md'],
   rules: {
     'no-console': 'off',
     'style/multiline-ternary': 'off',

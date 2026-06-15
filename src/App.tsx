@@ -1,4 +1,5 @@
 import type { FC } from 'react'
+import { Devtools } from '@/components/devtools'
 import { AntdProvider } from '@/providers/antd-provider'
 import { MultiProvider } from '@/providers/multi-provider'
 import { QueryProvider } from '@/providers/query-provider'
@@ -13,6 +14,7 @@ const App: FC = () => {
   return (
     <MultiProvider providers={providers}>
       <RouterProvider />
+      <Devtools />
     </MultiProvider>
   )
 }

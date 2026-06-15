@@ -1,14 +1,9 @@
-import { createRouter } from '@tanstack/react-router'
-import { routeTree } from '@/routeTree.gen'
+import type { RouteObject } from 'react-router'
+import { createBrowserRouter } from 'react-router'
+import { indexRoutes } from '@/routes/index'
 
-export const router = createRouter({
-  routeTree,
-  defaultPreload: 'intent',
-  defaultPreloadStaleTime: 0,
-})
+export const appRoutes = [
+  ...indexRoutes,
+] satisfies RouteObject[]
 
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router
-  }
-}
+export const router = createBrowserRouter(appRoutes)

@@ -12,14 +12,14 @@
 
 **English** | [简体中文](./README.zh-CN.md)
 
-A React + Vite template with TanStack Router, TanStack Query, Zustand and Tailwind CSS v4 preconfigured.
+A React + Vite template with React Router, TanStack Query, Zustand and Tailwind CSS v4 preconfigured.
 
 ## Features
 
 - [x] **React 19** with React Compiler
 - [x] **Vite 8** (rolldown)
 - [x] **TypeScript** strict mode
-- [x] **TanStack Router** — file-based routing
+- [x] **React Router** — data routing
 - [x] **TanStack Query**
 - [x] **Tailwind CSS v4**
 - [x] **Zustand**

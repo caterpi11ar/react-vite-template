@@ -12,14 +12,14 @@
 
 [English](./README.md) | **简体中文**
 
-预装 TanStack Router、TanStack Query、Zustand 和 Tailwind CSS v4 的 React + Vite 模板。
+预装 React Router、TanStack Query、Zustand 和 Tailwind CSS v4 的 React + Vite 模板。
 
 ## 能力清单
 
 - [x] **React 19** 内置 React Compiler
 - [x] **Vite 8**（rolldown）
 - [x] **TypeScript** 严格模式
-- [x] **TanStack Router** —— 文件路由
+- [x] **React Router** —— 数据路由
 - [x] **TanStack Query**
 - [x] **Tailwind CSS v4**
 - [x] **Zustand**

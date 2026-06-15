@@ -1,6 +1,6 @@
-import { RouterProvider as TanstackRouterProvider } from '@tanstack/react-router'
+import { RouterProvider as ReactRouterProvider } from 'react-router'
 import { router } from '@/lib/router'
 
 export function RouterProvider() {
-  return <TanstackRouterProvider router={router} />
+  return <ReactRouterProvider router={router} />
 }

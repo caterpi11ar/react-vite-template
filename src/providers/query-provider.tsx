@@ -37,8 +37,8 @@ export function QueryProvider({ children }: PropsWithChildren) {
           return
 
         if (error.response?.status === 401) {
-          const redirect = router.history.location.href
-          router.navigate({ to: '/', search: { redirect } })
+          const redirect = window.location.href
+          void router.navigate(`/?redirect=${encodeURIComponent(redirect)}`)
         }
       },
     }),
